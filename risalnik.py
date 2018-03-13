@@ -14,9 +14,11 @@ class Risalnik():
         self.tocka = None
         self.debelina = 5
         self.barva = 'black'
-        self.kajRisemo='PROSTOROCNA_CRTA' # oval
-        self.pravokotnikOgrodje=None
-        self.vmesniLik=None
+
+        self.kajRisemo = 'PROSTOROCNA_CRTA'  # OVAL
+        self.pravokotnikOgrodje = None
+        self.pravokotnik = None
+        self.vmesniLik = None
 
         # Naredimo področje za risanje
         self.canvas = Canvas(master, width=500, height=500)
@@ -42,11 +44,20 @@ class Risalnik():
     def zacni_risanje(self, event):
         if self.kajRisemo== 'PROSTOROCNA_CRTA':
             return
+
         if self.kajRisemo=='OVAL':
             self.tocka=(event.x,event.y)
             self.pravokotnikOgrodje=self.canvas.create_rectangle(event.x,event.y,event.x,event.y)
 
-
+        if self.kajRisemo == 'PRAVOKOTNIK':
+            self.tocka = (event.x, event.y)
+            self.pravokotnik = self.canvas.create_rectangle(event.x, event.y, event.x, event.y)
+            return
+        if self.kajRisemo == 'OZNACEVANJE':
+            najblizjiId = self.canvas.find_closest(event.x, event.y)
+            print(event.x, event.y, najblizjiId)
+            return
+        
     def nadaljuj_crto(self, event):
         '''Nadaljuj lomljeno črto.'''
         if self.kajRisemo == 'PROSTOROCNA_CRTA':
@@ -60,9 +71,14 @@ class Risalnik():
             return
         if self.kajRisemo == 'OVAL':
             if self.tocka is not None:
-                (xMin,yMin)=self.tocka
-                self.canvas.coords(self.pravokotnikOgrodje, xMin,yMin,event.x,event.y)
-            return
+                (xMin, yMin) = self.tocka
+                self.canvas.coords(self.pravokotnikOgrodje, xMin, yMin, event.x, event.y)
+                self.canvas.coords(self.vmesniLik, xMin, yMin, event.x, event.y)
+        if self.kajRisemo == 'PRAVOKOTNIK':
+            if self.tocka is not None:
+                (xMin, yMin) = self.tocka
+                self.canvas.coords(self.pravokotnik, xMin, yMin, event.x, event.y)
+            return 
 
     def izklopi_risanje(self, event):
         if self.kajRisemo == 'PROSTOROCNA_TOCKA':
@@ -73,6 +89,14 @@ class Risalnik():
             self.canvas.create_oval(xMin,yMin,event.x,event.y)
             self.tocka=None
             return
+
+        if self.kajRisemo == 'PRAVOKOTNIK':
+            (xMin, yMin) = self.tocka 
+            self.canvas.coords(self.pravokotnik, xMin, yMin, event.x, event.y)
+            self.tocka = None
+            self.pravokotnik = None
+            return
+
 
     def tipka_pritisnjena(self, event):
         if event.char == '+':
@@ -94,6 +118,20 @@ class Risalnik():
 
             # Glavnemu oknu rečemo "root" (koren), ker so grafični elementi
 
+        if event.char == 'p':
+            self.kajRisemo = 'PROSTOROCNA_CRTA'
+        if event.char == 'o':
+            self.kajRisemo = 'OVAL'
+        if event.char == 'z':
+            self.kajRisemo = 'OZNACEVANJE'
+        #popravi, kot zgoraj
+        #if event.char == 'k':
+        #    self.kajRisemo = 'PRAVOKOTNIK'
+        print(self.kajRisemo)
+                
+            
+            
+# Glavnemu oknu rečemo "root" (koren), ker so grafični elementi
 
 # organizirani v drevo, glavno okno pa je koren tega drevesa
 
