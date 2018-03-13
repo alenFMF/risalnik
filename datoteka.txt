@@ -1,4 +1,8 @@
 ﻿Ena datoteka, ki sem jo še malo spremenil.
 Paolo Mikulin
 Paolo mislm da si na napačno datoteko pisal ;)
+<<<<<<< HEAD
 Luka Markelj
+=======
+Kristijan Šaver
+>>>>>>> 74bbe3d694194482b4b9b32f53a19d0f7c9fda51

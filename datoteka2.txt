@@ -1,6 +1,16 @@
 Ena datoteka
+<<<<<<< HEAD
+Katja Bukovec
+Pozdravljen Nezemljan!!! Predaj se preden te ustrelimo!
+Kristijan �aver
+=======
 Karel Križnar
 
 Pozdravljen Nezemljan!!! Predaj se preden te ustrelimo! Lp Dimes(meme)
 Blaž Dobravec
 Žiga Herič
+<<<<<<< HEAD
+>>>>>>> 6b68c8762e1edb2972464e6bdf173517acbf087f
+=======
+Katja Bukovec
+>>>>>>> 4849147b6f270011464b5f7b33630b671443ceb0
